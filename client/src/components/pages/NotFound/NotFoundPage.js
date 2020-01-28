@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 class NotFound extends Component {
   state = {
-    counter: 77777
+    counter: 7
   };
 
   componentDidMount = () => {
@@ -28,11 +28,7 @@ class NotFound extends Component {
         </h1>
         <p> Redirect to homepage in {this.state.counter} seconds </p>
         {!this.state.counter && <Redirect to="/" />}
-        <img
-          src="../../img/deadend.jpg"
-          className="card-img-top"
-          alt="They map"
-        />
+        <img src="./img/deadend.jpg" className="card-img-top" alt="DeadEnd" />
       </div>
     );
   }
