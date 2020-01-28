@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 const PostsCounter = ({ posts }) => {
-  return posts.length && <div>Posts counter {posts.length}</div>;
+  return posts.length > 0 ? (
+    <div>Posts counter {posts.length}</div>
+  ) : (
+    <div>There are no posts in this category</div>
+  );
 };
 
 const mapStateToProps = state => ({
