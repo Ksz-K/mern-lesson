@@ -19,12 +19,12 @@ app.get("/api/posts", (req, res) => {
       id: "2evxc34",
       title: "Lorem Ipsum II",
       content:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit."
+        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. "
     }
   ];
   res.json(data);
 });
 
-app.listen(8000, function() {
+app.listen(8000, () => {
   console.log("Server is running on port:", 8000);
 });

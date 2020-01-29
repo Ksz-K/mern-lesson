@@ -11,7 +11,7 @@ const PostsCounter = ({ posts }) => {
 };
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  posts: state.posts.data
 });
 
 PostsCounter.propsType = {

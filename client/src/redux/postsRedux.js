@@ -1,11 +1,8 @@
 import axios from "axios";
 import { API_URL } from "../config";
 
-/* SELECTORS */
-
-export const getPosts = ({ posts }) => posts.data;
 /* ACTIONS */
-
+export const getPosts = ({ posts }) => posts.data;
 export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 export const loadPostsRequest = () => {
   return async dispatch => {
@@ -16,26 +13,29 @@ export const loadPostsRequest = () => {
       dispatch(loadPosts(res.data));
       dispatch(endRequest());
     } catch (e) {
-      dispatch(endRequest());
+      dispatch(errorRequest(e.message));
     }
   };
 };
 export const getRequest = ({ posts }) => posts.request;
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
+export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 
-// action name creator
 const reducerName = "posts";
 const createActionName = name => `app/${reducerName}/${name}`;
 export const LOAD_POSTS = createActionName("LOAD_POSTS");
 export const START_REQUEST = createActionName("START_REQUEST");
 export const END_REQUEST = createActionName("END_REQUEST");
+export const ERROR_REQUEST = createActionName("ERROR_REQUEST");
 /* INITIAL STATE */
 
 const initialState = {
   data: [],
   request: {
-    pending: false
+    pending: false,
+    error: null,
+    success: null
   }
 };
 
@@ -46,9 +46,20 @@ export default function reducer(statePart = initialState, action = {}) {
     case LOAD_POSTS:
       return { ...statePart, data: action.payload };
     case START_REQUEST:
-      return { ...statePart, request: { pending: true } };
+      return {
+        ...statePart,
+        request: { pending: true, error: null, success: null }
+      };
     case END_REQUEST:
-      return { ...statePart, request: { pending: false } };
+      return {
+        ...statePart,
+        request: { pending: false, error: null, success: true }
+      };
+    case ERROR_REQUEST:
+      return {
+        ...statePart,
+        request: { pending: false, error: action.error, success: false }
+      };
     default:
       return statePart;
   }
