@@ -17,7 +17,6 @@ class Posts extends React.Component {
       request: { pending, error, success }
     } = this.props;
 
-    console.log(error);
     return (
       <div>
         {(pending || success === null) && <Spinner />}
