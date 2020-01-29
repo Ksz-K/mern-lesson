@@ -13,7 +13,7 @@ import "./PostItemPage.scss";
 const PostItemPage = ({
   match,
   getSinglePost,
-  singlePost: { title, content },
+  singlePost: { title, content, author },
   request: { pending, error, success }
 }) => {
   useEffect(() => {
@@ -28,6 +28,9 @@ const PostItemPage = ({
         ) : (
           <Fragment>
             <PageTitle>{title}</PageTitle>
+            <p>
+              Author: <strong>{author}</strong>
+            </p>
             <HtmlBox>{content}</HtmlBox>
             <Link to="/posts">
               <Button variant="primary">Return to posts</Button>

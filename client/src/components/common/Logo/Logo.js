@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Fragment } from "react";
 
-import './Logo.scss';
+import "./Logo.scss";
 
 const Logo = ({ links, location }) => (
-  <h1 className="logo">Blog.app</h1>
+  <Fragment>
+    <h1 className="logo">Blog.app</h1>
+    <img src={links} alt="logo" />
+  </Fragment>
 );
 
 export default Logo;

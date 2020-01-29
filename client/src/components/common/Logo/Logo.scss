@@ -1,8 +1,18 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
 .logo {
   font-weight: bold;
   font-size: $base-size * 2;
   color: $color-text;
   margin: $base-size;
+}
+
+img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  border: 1px solid #000;
+  width: 50px;
+  height: 50px;
 }
