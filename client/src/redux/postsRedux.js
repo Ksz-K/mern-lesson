@@ -63,12 +63,10 @@ export const updEditedPost = (post, id) => {
     }
   };
 };
-export const loadPostsByPageRequest = page => {
+export const loadPostsByPageRequest = (page, postsPerPage = 3) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const postsPerPage = 3;
-
       const startAt = (page - 1) * postsPerPage;
       const limit = postsPerPage;
 
@@ -118,7 +116,7 @@ const initialState = {
     success: null
   },
   amount: null,
-  postsPerPage: 10,
+  postsPerPage: 3,
   presentPage: 1
 };
 

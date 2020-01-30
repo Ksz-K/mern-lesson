@@ -7,14 +7,9 @@ import PostsList from "../PostsList/PostsList";
 
 class Posts extends React.Component {
   componentDidMount() {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage(1);
+    const { loadPostsByPage, postsOnPage } = this.props;
+    loadPostsByPage(1, postsOnPage);
   }
-
-  loadPostsPage = page => {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage(page);
-  };
 
   render() {
     const {
@@ -23,9 +18,10 @@ class Posts extends React.Component {
       request: { pending, error, success },
       postsNo,
       postsOnPage,
-      currentPage
+      currentPage,
+      loadPostsByPage
     } = this.props;
-    const { loadPostsPage } = this;
+
     return (
       <div>
         {(pending || success === null) && <Spinner />}
@@ -39,7 +35,7 @@ class Posts extends React.Component {
                   postsNo={postsNo}
                   postsOnPage={postsOnPage}
                   currentPage={currentPage}
-                  onPageChange={loadPostsPage}
+                  loadPostsByPage={loadPostsByPage}
                 />
               </Fragment>
             )

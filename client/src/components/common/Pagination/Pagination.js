@@ -8,10 +8,11 @@ class Pagination extends React.Component {
     presentPage: this.props.initialPage || 1
   };
 
-  changePage = newPage => {
-    const { onPageChange } = this.props;
+  changePage = (newPage, postsOnPage) => {
+    const { loadPostsByPage } = this.props;
     this.setState({ presentPage: newPage });
-    onPageChange(newPage);
+    console.log(postsOnPage);
+    loadPostsByPage(newPage, postsOnPage);
   };
 
   render() {
@@ -19,14 +20,15 @@ class Pagination extends React.Component {
     const { changePage } = this;
 
     return (
-      <div className="pagination">
-        <ul className="pagination__list">
+      <div className="ppagination">
+        <ul className="ppagination__list">
           {currentPage > 1 ? (
             <li>
               <button
-                className="btn-pagination"
+                className="btn-ppagination"
                 onClick={() => {
-                  changePage(currentPage - 1);
+                  console.log(postsOnPage);
+                  changePage(currentPage - 1, postsOnPage);
                 }}
               >
                 <i className="fas fa-arrow-left"></i>
@@ -40,21 +42,21 @@ class Pagination extends React.Component {
             <li
               key={++page}
               onClick={() => {
-                changePage(page);
+                changePage(page, postsOnPage);
               }}
-              className={`pagination__list__item${
+              className={`ppagination__list__item ppagination__list__item${
                 page === currentPage ? "--active" : ""
               }`}
             >
-              {page}
+              {postsOnPage !== 123456789 ? `${page}` : ""}
             </li>
           ))}
           {currentPage < pages ? (
             <li>
               <button
-                className="btn-pagination"
+                className="btn-ppagination"
                 onClick={() => {
-                  changePage(currentPage + 1);
+                  changePage(currentPage + 1, postsOnPage);
                 }}
               >
                 <i className="fas fa-arrow-right"></i>
@@ -72,7 +74,7 @@ class Pagination extends React.Component {
 Pagination.propTypes = {
   pages: PropTypes.number.isRequired,
   initialPage: PropTypes.number,
-  onPageChange: PropTypes.func.isRequired
+  loadPostsByPage: PropTypes.func.isRequired
 };
 
 export default Pagination;
