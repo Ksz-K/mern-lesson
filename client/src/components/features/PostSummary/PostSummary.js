@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -12,9 +12,11 @@ const PostSummary = ({ _id, title, content, author }) => (
   <article className="post-summary">
     <SmallTitle>{title}</SmallTitle>
     <HtmlBox>{cutText(content, 250)}</HtmlBox>
-    <p>
-      Author: <strong>{author}</strong>
-    </p>
+    <Fragment>
+      <p>
+        Author: <strong>{author}</strong>
+      </p>
+    </Fragment>
     <Link to={`/posts/${_id}`}>
       <Button variant="primary">Read more</Button>
     </Link>

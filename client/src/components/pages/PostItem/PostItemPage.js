@@ -35,6 +35,9 @@ const PostItemPage = ({
             <Link to="/posts">
               <Button variant="primary">Return to posts</Button>
             </Link>
+            <Link to={`/posts/edit/${match.params.id}`}>
+              <Button variant="default">Post editing...</Button>
+            </Link>
             {!pending && error !== null && (
               <Alert variant={"error"}>{error}</Alert>
             )}
