@@ -2,17 +2,22 @@ import { connect } from "react-redux";
 import {
   getPosts,
   getRequest,
-  loadPostsRequest
+  loadPostsByPageRequest,
+  getPages
 } from "../../../redux/postsRedux";
 import Posts from "./Posts";
 
 const mapStateToProps = state => ({
   posts: getPosts(state),
-  request: getRequest(state)
+  request: getRequest(state),
+  pages: getPages(state),
+  postsNo: state.posts.amount,
+  postsOnPage: state.postsPerPage,
+  currentPage: state.posts.presentPage
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadPosts: () => dispatch(loadPostsRequest())
+  loadPostsByPage: page => dispatch(loadPostsByPageRequest(page))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

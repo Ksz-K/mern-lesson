@@ -1,26 +1,49 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { PropTypes } from "prop-types";
-
+import Pagination from "../../common/Pagination/Pagination";
 import Spinner from "../../common/Spinner/Spinner";
 import Alert from "../../common/Alert/Alert";
 import PostsList from "../PostsList/PostsList";
 
 class Posts extends React.Component {
   componentDidMount() {
-    const { loadPosts } = this.props;
-    loadPosts();
+    const { loadPostsByPage } = this.props;
+    loadPostsByPage(1);
   }
+
+  loadPostsPage = page => {
+    const { loadPostsByPage } = this.props;
+    loadPostsByPage(page);
+  };
 
   render() {
     const {
       posts,
-      request: { pending, error, success }
+      pages,
+      request: { pending, error, success },
+      postsNo,
+      postsOnPage,
+      currentPage
     } = this.props;
-
+    const { loadPostsPage } = this;
     return (
       <div>
         {(pending || success === null) && <Spinner />}
-        {posts.length ? !pending && success && <PostsList posts={posts} /> : ""}
+        {posts.length
+          ? !pending &&
+            success && (
+              <Fragment>
+                <PostsList posts={posts} />{" "}
+                <Pagination
+                  pages={pages}
+                  postsNo={postsNo}
+                  postsOnPage={postsOnPage}
+                  currentPage={currentPage}
+                  onPageChange={loadPostsPage}
+                />
+              </Fragment>
+            )
+          : ""}
         {!pending && error !== null && <Alert variant={"error"}>{error}</Alert>}
         {!pending && success && !posts.length && (
           <Alert variant={"info"}>No posts</Alert>
@@ -39,7 +62,11 @@ Posts.propTypes = {
       author: PropTypes.string.isRequired
     })
   ),
-  loadPosts: PropTypes.func.isRequired
+  request: PropTypes.object.isRequired,
+  pages: PropTypes.number.isRequired,
+  postsNo: PropTypes.number,
+  postsOnPage: PropTypes.number,
+  currentPage: PropTypes.number
 };
 
 export default Posts;
