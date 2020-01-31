@@ -9,7 +9,6 @@ const NavBar = () => {
     { path: "/", title: "Home" },
     { path: "/posts/new", title: "Add post" },
     { path: "/posts", title: "Posts" },
-    // { path: `/posts/${randomPost}`, title: "Random Post" },
     { path: "/contact", title: "Contact" }
   ]);
 
