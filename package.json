@@ -13,6 +13,7 @@
     "start:client": "cd client && yarn start",
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
-    "postinstall": "run-p install:*"
+    "postinstall": "run-p install:*",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   }
 }
