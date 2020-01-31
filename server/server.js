@@ -3,10 +3,6 @@ const express = require("express");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
-<<<<<<< HEAD
-const path = require("path");
-=======
->>>>>>> part10
 const config = require("./config");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -43,22 +39,6 @@ db.once("open", () => {
 });
 db.on("error", err => console.log("Error " + err));
 
-<<<<<<< HEAD
-//Serve static assets in production
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
-const PORT = process.env.PORT || 8000;
-
-app.listen(PORT, function() {
-  console.log(`Server is running on Port: ${PORT}`);
-=======
 app.listen(config.PORT, function() {
   console.log("Server is running on Port:", config.PORT);
->>>>>>> part10
 });

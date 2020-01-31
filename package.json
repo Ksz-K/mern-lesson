@@ -11,6 +11,8 @@
     "start": "npm-run-all -p -l start:*",
     "start:server": "cd server && yarn start",
     "start:client": "cd client && yarn start",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "postinstall": "run-p install:*"
   }
 }
