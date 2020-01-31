@@ -1,30 +1,42 @@
+require("dotenv").config({ path: ".env" });
 const express = require("express");
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
+<<<<<<< HEAD
 const path = require("path");
+=======
+const config = require("./config");
+const mongoose = require("mongoose");
+const loadTestData = require("./testData");
+
+>>>>>>> part9
 const app = express();
 
+// import routes
+const postRoutes = require("./routes/post.routes");
+
+app.use(helmet());
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use("/api", postRoutes);
+app.use(
+  mongoSanitize({
+    replaceWith: "_"
+  })
+);
+// connects our back end code with the database
+mongoose.connect(config.DB, { useNewUrlParser: true });
+let db = mongoose.connection;
 
-app.get("/api/posts", (req, res) => {
-  const data = [
-    {
-      id: "1adfasf",
-      title: "Lorem Ipsum",
-      content:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit."
-    },
-    {
-      id: "2evxc34",
-      title: "Lorem Ipsum II",
-      content:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit."
-    }
-  ];
-  res.json(data);
+db.once("open", () => {
+  console.log("Connected to the database");
+  loadTestData();
 });
+db.on("error", err => console.log("Error " + err));
 
+<<<<<<< HEAD
 //Serve static assets in production
 
 if (process.env.NODE_ENV === "production") {
@@ -37,4 +49,8 @@ if (process.env.NODE_ENV === "production") {
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, function() {
   console.log(`Server is running on port: ${PORT}`);
+=======
+app.listen(config.PORT, function() {
+  console.log("Server is running on Port:", config.PORT);
+>>>>>>> part9
 });

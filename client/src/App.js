@@ -20,6 +20,7 @@ class App extends React.Component {
           <Route path="/posts" exact component={Posts} />
           <Route path="/contact" exact component={Contact} />
           <Route path="/posts/new" exact component={AddPost} />
+          <Route path="/posts/edit/:id" component={AddPost} />
           <Route path="/posts/:id" component={PostItem} />
           <Route component={NotFound} />
         </Switch>

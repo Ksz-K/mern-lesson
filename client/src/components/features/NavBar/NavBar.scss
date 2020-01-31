@@ -1,0 +1,20 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 2rem;
+  z-index: 1;
+  width: 100%;
+  border-bottom: solid 1px #17a2b8;
+  opacity: 0.9;
+
+  a {
+    color: #17a2b8;
+    padding: 0 0.45rem;
+    margin: 0 0.25rem;
+
+    &:hover {
+      color: #033b44;
+    }
+  }
+}

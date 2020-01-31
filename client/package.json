@@ -7,13 +7,21 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "animate.css": "3.7.0",
+    "axios": "0.18.0",
     "node-sass": "4.12.0",
     "react": "^16.12.0",
     "react-animated-css": "1.2.1",
     "react-dom": "^16.12.0",
+    "react-facebook": "8.0.4",
+    "react-html-parser": "2.0.2",
     "react-icons": "3.7.0",
+    "react-medium-editor": "1.8.1",
+    "react-redux": "7.0.1",
     "react-router-dom": "5.0.0",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "redux": "4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,5 +43,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8000/"
 }
