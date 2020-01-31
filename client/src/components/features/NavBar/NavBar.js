@@ -1,27 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../common/Logo/Logo";
 import MainMenu from "../../layout/MainMenu/MainMenu";
+import { CreateRandomID } from "./CreateRandomID";
 import "./NavBar.scss";
-class NavBar extends React.Component {
-  state = {
-    links: [
-      { path: "/", title: "Home" },
-      { path: "/posts/new", title: "Add post" },
-      { path: "/posts", title: "Posts" },
-      { path: "/contact", title: "Contact" }
-    ]
-  };
 
-  render() {
-    const { links } = this.state;
+const NavBar = () => {
+  const [links, setLinks] = useState([
+    { path: "/", title: "Home" },
+    { path: "/posts/new", title: "Add post" },
+    { path: "/posts", title: "Posts" },
+    // { path: `/posts/${randomPost}`, title: "Random Post" },
+    { path: "/contact", title: "Contact" }
+  ]);
 
-    return (
-      <nav className="navbar">
-        <Logo links="https://kszk.vot.pl/kszk.png" />
-        <MainMenu links={links} />
-      </nav>
-    );
-  }
-}
+  useEffect(() => {
+    (async function wait4ID() {
+      const randomPost = await CreateRandomID();
+      setLinks([
+        ...links,
+        { path: `/posts/${randomPost}`, title: "Random Post" }
+      ]);
+    })();
+  }, []);
+
+  return (
+    <nav className="navbar">
+      <Logo links="https://kszk.vot.pl/kszk.png" />
+      <MainMenu links={links} />
+    </nav>
+  );
+};
 
 export default NavBar;

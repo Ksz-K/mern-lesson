@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import { withRouter } from "react-router-dom";
 import "./Pagination.scss";
 
 class Pagination extends React.Component {
@@ -11,16 +11,22 @@ class Pagination extends React.Component {
   changePage = (newPage, postsOnPage) => {
     const { loadPostsByPage } = this.props;
     this.setState({ presentPage: newPage });
-    console.log(postsOnPage);
     loadPostsByPage(newPage, postsOnPage);
   };
-
+  getSeenStatus = () => {
+    const { match } = this.props;
+    if (match.path === "/") {
+      return { display: "none" };
+    } else {
+      return {};
+    }
+  };
   render() {
     const { pages, postsNo, postsOnPage, currentPage } = this.props;
     const { changePage } = this;
 
     return (
-      <div className="ppagination">
+      <div className="ppagination" style={this.getSeenStatus()}>
         <ul className="ppagination__list">
           {currentPage > 1 ? (
             <li>
@@ -77,4 +83,4 @@ Pagination.propTypes = {
   loadPostsByPage: PropTypes.func.isRequired
 };
 
-export default Pagination;
+export default withRouter(Pagination);

@@ -5,7 +5,15 @@ const uuid = require("uuid");
 // get all posts
 exports.getPosts = async (req, res) => {
   try {
-    res.status(200).json(await Post.find());
+    res.status(200).json(await Post.find().sort({ _id: -1 }));
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+// get all posts IDs
+exports.getIDs = async (req, res) => {
+  try {
+    res.status(200).json(await Post.find().distinct("_id"));
   } catch (err) {
     res.status(500).json(err);
   }
@@ -61,6 +69,7 @@ exports.getPostsByRange = async function(req, res) {
     limit = parseInt(limit);
 
     const posts = await Post.find()
+      .sort({ _id: -1 })
       .skip(startAt)
       .limit(limit);
     const amount = await Post.countDocuments();

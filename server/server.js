@@ -1,6 +1,7 @@
 require("dotenv").config({ path: ".env" });
 const express = require("express");
 const helmet = require("helmet");
+mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const config = require("./config");
 const mongoose = require("mongoose");
@@ -16,7 +17,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api", postRoutes);
-
+app.use(
+  mongoSanitize({
+    replaceWith: "_"
+  })
+);
 // connects our back end code with the database
 mongoose.connect(config.DB, { useNewUrlParser: true });
 let db = mongoose.connection;

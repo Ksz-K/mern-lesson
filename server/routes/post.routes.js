@@ -5,6 +5,8 @@ const PostController = require("../controllers/post.controller");
 
 // get all posts
 router.route("/posts").get(PostController.getPosts);
+// get all IDs
+router.route("/ids").get(PostController.getIDs);
 // get post by Id
 router.route("/posts/:id").get(PostController.getPostById);
 // get post by Id for editing
