@@ -1,7 +1,7 @@
 require("dotenv").config({ path: ".env" });
 const express = require("express");
 const helmet = require("helmet");
-mongoSanitize = require("express-mongo-sanitize");
+const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 const config = require("./config");
 const mongoose = require("mongoose");
