@@ -42,7 +42,7 @@ const PageParameters = ({
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="100">100</option>
-            <option value="123456789">All of them</option>
+            <option value={Infinity}>All of them</option>
           </select>
           <small className="form-text">How many posts per page ?</small>
         </div>

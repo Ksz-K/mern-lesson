@@ -48,7 +48,7 @@ class Pagination extends React.Component {
                 page === currentPage ? "--active" : ""
               }`}
             >
-              {postsOnPage !== 123456789 ? `${page}` : ""}
+              {postsOnPage !== { Infinity } ? `${page}` : ""}
             </li>
           ))}
           {currentPage < pages ? (
